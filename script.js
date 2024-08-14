@@ -22,9 +22,9 @@ function staticLoadPlaces() {
 var models = [
     {
         url: './assets/pin/scene.gltf',
-        scale: '0.5 0.5 0.5',
+        scale: '5 5 5',
         info: 'Pin, Lv. 5, HP 10/10',
-        rotation: '0 180 0',
+        rotation: '0 0 0',
     },
     {
         url: './assets/pin/scene.gltf',
