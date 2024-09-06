@@ -1,22 +1,31 @@
-
     // Yön bilgilerini yazdıran işlev
-    function deviceOrientationHandler(tiltLR, tiltFB, dir) {
+    function deviceOrientationHandler(tiltLR, tiltFB, dir, absolute) {
         const instructionsDiv = document.querySelector('.instructions');
         instructionsDiv.innerHTML = `
           <p>Tilt Left/Right (Gamma): ${Math.ceil(tiltLR)}°</p>
           <p>Tilt Front/Back (Beta): ${Math.ceil(tiltFB)}°</p>
-          <p>Direction (Alpha): ${Math.ceil(dir)}°</p>
+          <p>Direction (Alpha - ${absolute ? 'Absolute' : 'Relative'}): ${Math.ceil(dir)}°</p>
         `;
     }
 
     // Cihazın yön bilgisini alma işlevi
     document.addEventListener('DOMContentLoaded', function(event) {
-        if (window.DeviceOrientationEvent) {
+        if ('ondeviceorientationabsolute' in window) {
+            // Mutlak yön destekleniyor
+            window.addEventListener('deviceorientationabsolute', (eventData) => {
+                const tiltLR = eventData.gamma;
+                const tiltFB = eventData.beta;
+                const dir = eventData.alpha;
+                deviceOrientationHandler(tiltLR, tiltFB, dir, true);
+            }, false);
+        } else if ('ondeviceorientation' in window) {
+            // Mutlak yön desteklenmiyor, normal yön bilgisi
             window.addEventListener('deviceorientation', (eventData) => {
                 const tiltLR = eventData.gamma;
                 const tiltFB = eventData.beta;
                 const dir = eventData.alpha;
-                deviceOrientationHandler(tiltLR, tiltFB, dir);
+                const absolute = eventData.absolute;
+                deviceOrientationHandler(tiltLR, tiltFB, dir, absolute);
             }, false);
         } else {
             document.querySelector('.instructions').innerHTML = 'Device Orientation API not supported.';
