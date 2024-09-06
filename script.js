@@ -1,4 +1,3 @@
-
 window.onload = () => {
     const button = document.querySelector('button[data-action="change"]');
     button.innerText = '﹖';
@@ -6,6 +5,43 @@ window.onload = () => {
     let places = staticLoadPlaces();
     renderPlaces(places);
 };
+
+// Yön bilgilerini almak için dinleyici ekle
+window.addEventListener('deviceorientation', (event) => {
+    let alpha = event.alpha;
+    let beta = event.beta;
+
+    if (beta > 75) {
+        let direction = calculateDirection(alpha);
+        const div = document.querySelector('.instructions');
+        div.innerText = `Current Direction: ${direction}`;
+    } else {
+        const div = document.querySelector('.instructions');
+        div.innerText = 'Hold the phone upright to get direction';
+    }
+});
+
+function calculateDirection(alpha) {
+    if (alpha >= 0 && alpha < 22.5) {
+        return "North";
+    } else if (alpha >= 22.5 && alpha < 67.5) {
+        return "Northeast";
+    } else if (alpha >= 67.5 && alpha < 112.5) {
+        return "East";
+    } else if (alpha >= 112.5 && alpha < 157.5) {
+        return "Southeast";
+    } else if (alpha >= 157.5 && alpha < 202.5) {
+        return "South";
+    } else if (alpha >= 202.5 && alpha < 247.5) {
+        return "Southwest";
+    } else if (alpha >= 247.5 && alpha < 292.5) {
+        return "West";
+    } else if (alpha >= 292.5 && alpha < 337.5) {
+        return "Northwest";
+    } else {
+        return "North";
+    }
+}
 
 function staticLoadPlaces() {
     return [
