@@ -6,13 +6,21 @@ window.onload = () => {
     renderPlaces(places);
 };
 
-// Yön bilgilerini almak için dinleyici ekle
 window.addEventListener('deviceorientation', (event) => {
     let alpha = event.alpha;
     let beta = event.beta;
 
+    // İlk açılışta başlangıç referans açısını kaydet
+    if (initialAlpha === null) {
+        initialAlpha = alpha;
+    }
+
+    // Telefon dikey konumdayken yön bilgisi hesapla
     if (beta > 75) {
-        let direction = calculateDirection(alpha);
+        // Referans açısını kullanarak düzeltme yap
+        let correctedAlpha = (alpha - initialAlpha + 360) % 360;
+        let direction = calculateDirection(correctedAlpha);
+
         const div = document.querySelector('.instructions');
         div.innerText = `Current Direction: ${direction}`;
     } else {
