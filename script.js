@@ -15,7 +15,7 @@
             window.addEventListener('deviceorientationabsolute', (eventData) => {
                 const tiltLR = eventData.gamma;
                 const tiltFB = eventData.beta;
-                const dir = eventData.alpha;
+                const dir = eventData.alpha; 
                 deviceOrientationHandler(tiltLR, tiltFB, dir, true);
             }, false);
         } else if ('ondeviceorientation' in window) {
