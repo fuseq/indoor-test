@@ -6,21 +6,13 @@ window.onload = () => {
     renderPlaces(places);
 };
 
+// Yön bilgilerini almak için dinleyici ekle
 window.addEventListener('deviceorientation', (event) => {
     let alpha = event.alpha;
     let beta = event.beta;
 
-    // İlk açılışta başlangıç referans açısını kaydet
-    if (initialAlpha === null) {
-        initialAlpha = alpha;
-    }
-
-    // Telefon dikey konumdayken yön bilgisi hesapla
     if (beta > 75) {
-        // Referans açısını kullanarak düzeltme yap
-        let correctedAlpha = (alpha - initialAlpha + 360) % 360;
-        let direction = calculateDirection(correctedAlpha);
-
+        let direction = alpha;
         const div = document.querySelector('.instructions');
         div.innerText = `Current Direction: ${direction}`;
     } else {
@@ -29,27 +21,6 @@ window.addEventListener('deviceorientation', (event) => {
     }
 });
 
-function calculateDirection(alpha) {
-    if (alpha >= 0 && alpha < 22.5) {
-        return "North";
-    } else if (alpha >= 22.5 && alpha < 67.5) {
-        return "Northeast";
-    } else if (alpha >= 67.5 && alpha < 112.5) {
-        return "East";
-    } else if (alpha >= 112.5 && alpha < 157.5) {
-        return "Southeast";
-    } else if (alpha >= 157.5 && alpha < 202.5) {
-        return "South";
-    } else if (alpha >= 202.5 && alpha < 247.5) {
-        return "Southwest";
-    } else if (alpha >= 247.5 && alpha < 292.5) {
-        return "West";
-    } else if (alpha >= 292.5 && alpha < 337.5) {
-        return "Northwest";
-    } else {
-        return "North";
-    }
-}
 
 function staticLoadPlaces() {
     return [
