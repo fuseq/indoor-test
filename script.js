@@ -26,18 +26,7 @@ var models = [
         info: 'Pin, Lv. 5, HP 10/10',
         rotation: '0 0 0',
     },
-    {
-        url: './assets/pin/scene.gltf',
-        scale: '0.2 0.2 0.2',
-        rotation: '0 180 0',
-        info: 'Pin, Lv. 80, HP 100/100',
-    },
-    {
-        url: './assets/pin/scene.gltf',
-        scale: '0.08 0.08 0.08',
-        rotation: '0 180 0',
-        info: 'Pin, Lv. 99, HP 150/150',
-    },
+  
 ];
 
 var modelIndex = 0;
