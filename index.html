@@ -14,43 +14,52 @@
     </script>
     <script src="./script.js"></script>
     <link rel="stylesheet" type="text/css" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+
+
     <style>
-        .example-container {
-            display: flex;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.7);
-            /* Siyah, transparan arka plan */
-            padding: 10px 20px;
-            border-radius: 15px;
-            /* Köşeleri yuvarlama */
-        }
+.bubble {
+    background-color: #eee;
+    border: 2px solid #333;
+    border-radius: 5px;
+    color: #333;
+    display: inline-block;
+    font: 16px/24px sans-serif;
+    padding: 12px 24px;
+    position: relative;
+}
+.bubble:after,
+.bubble:before {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #eee;
+    bottom: -20px;
+    content: '';
+    left: 50%;
+    margin-left: -20px;
+    position: absolute;
+}
 
-        .fa-person-walking {
-            color: white;
-            /* İkonun rengi */
-            font-size: 30px;
-            /* İkon boyutu */
-            margin-right: 10px;
-            /* İkon ve yazı arasındaki boşluk */
-        }
+/* Styling for second triangle (border) */
 
-        h1 {
-            color: white;
-            /* Yazının rengi */
-            margin: 0;
-            /* Varsayılan margin'i kaldırma */
-        }
+.bubble:before {
+    border-left: 23px solid transparent;
+    border-right: 23px solid transparent;
+    border-top: 23px solid;
+    border-top-color: inherit; /* Can't be included in the shorthand to work */
+    bottom: -23px;
+    margin-left: -23px;
+}
     </style>
 </head>
 
 <body style='margin: 0; overflow: hidden;'>
     <div class="centered instructions"></div>
     <a-scene>
-        <a-entity htmlembed position="0 0 5">
-            <div class="example-container">
-                <i class="fa-solid fa-person-walking"></i>
-                <h1>An Example</h1>
-            </div>
+        <a-entity htmlembed position="0 0 -5">
+            <span class="bubble">Speech bubble with a border</span>
         </a-entity>
     </a-scene>
     <div class="centered">
